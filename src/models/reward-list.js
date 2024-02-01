@@ -103,7 +103,13 @@ export class RewardList extends Component {
         var alertText = '';
         if (this.state.showAlert) {
             alertText = (
-                <Alert variant="success" onClose={() => this.setState({showAlert: false})} dismissible>
+                <Alert 
+                    variant="success"
+                    className="position-absolute top-0 start-50"
+                    onClose={() => this.setState({showAlert: false})} 
+                    style={{zIndex: 9999}}
+                    dismissible
+                >
                     <Alert.Heading>成功取得忠誠點數清單</Alert.Heading>
                 </Alert>
             );

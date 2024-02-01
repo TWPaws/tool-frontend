@@ -70,15 +70,26 @@ export class RewardList extends Component {
         promise.then(this.getRewardListData);
     }
 
+    deleteReward = (rewardId) => {
+        fetch(this.URL_PREFIX.concat(`/redemption/rewards/${rewardId}?access_token=${access_token}&broadcaster_id=${this.state.broadcasterId}`), {method: "DELETE"})
+        .then(res => res.json())
+        .then(data => {
+            this.getRewardListData();
+        })
+    }
 
     hideCreateModal = () => {
         this.setState({showCreateModal: false});
     }
 
     updateRewardRenderItem = () => {
-        console.log(this.state.rewards);
         var rewardItems = this.state.rewards.map(reward =>
-            <Reward title={reward.title} claimers={reward.claimers} key={reward.id} id={crypto.randomUUID()} />
+            <Reward 
+                title={reward.title} 
+                claimers={reward.claimers} 
+                key={reward.id} 
+                id={reward.id}
+                deleteReward={this.deleteReward} />
         )
         this.setState({rewardItems: rewardItems});
     }

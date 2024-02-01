@@ -13,10 +13,12 @@ export class RewardList extends Component {
         broadcasterId: '',
         rewardItems: [],
         showAlert: false,
-        showCreateModal: false
+        showCreateModal: false,
+        isReloading: false
     }
 
     getRewardListData = () => {
+        this.setState({isReloading: true});
         fetch(this.URL_PREFIX.concat(`/redemption/rewards?access_token=${access_token}&broadcaster_id=${this.state.broadcasterId}`), {method: "GET"})
         .then(res => res.json())
         .then(data => {
@@ -35,7 +37,10 @@ export class RewardList extends Component {
         .then(() => {
             this.setState({showAlert: true});
             setTimeout(() => this.setState({showAlert: false}), 3000);
-            this.setState({showCreateModal: false});
+            this.setState({
+                showCreateModal: false,
+                isReloading: false
+            });
         })
         .catch(e => console.log(e));
     }
@@ -107,7 +112,13 @@ export class RewardList extends Component {
         return (
             <>
             {alertText}
-            <Button onClick={this.getRewardListData} style={{margin: "10px"}}>刷新清單</Button>
+            <Button 
+                onClick={this.getRewardListData} 
+                style={{margin: "10px"}}
+                disabled={this.state.isReloading}
+            >
+                {this.state.isReloading ? "刷新中..." : "刷新清單"}
+            </Button>
             <Button onClick={this.createReward}>建立忠誠點數</Button>
             <Stack gap={3}>
                 <Accordion>

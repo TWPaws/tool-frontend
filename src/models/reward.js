@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Accordion, Button, Modal, Alert } from "react-bootstrap";
+import { Accordion, Button, Modal } from "react-bootstrap";
 import { ClaimerList } from "./claimer-list";
 
 export class Reward extends Component {

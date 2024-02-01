@@ -3,7 +3,10 @@ import { Form, Modal, Row, Col, InputGroup, Button } from "react-bootstrap";
 
 export class RewardEditor extends Component {
     state = {
-        modalTitle: ""
+        modalTitle: "",
+        isMaxPerStreamEnabled: false,
+        isMaxPerUserPerStreamEnabled: false,
+        isGlobalCooldownEnabled: false
     }
 
     submitForm = (e) => {
@@ -42,6 +45,18 @@ export class RewardEditor extends Component {
             is_global_cooldown_enabled: data.isGlobalCooldownEnabled.checked,
             global_cooldown_seconds: globalCooldownSeconds
         }
+    }
+    
+    handleMaxPerStream = (e) => {
+        this.setState({isMaxPerStreamEnabled: e.target.checked});
+    }
+
+    handleMaxPerUserPerStream = (e) => {
+        this.setState({isMaxPerUserPerStreamEnabled: e.target.checked});
+    }
+
+    handleGlobalCooldown = (e) => {
+        this.setState({isGlobalCooldownEnabled: e.target.checked});
     }
 
     render() {
@@ -82,15 +97,15 @@ export class RewardEditor extends Component {
                             <Form.Group as={Col} controlId="maxPerStream">
                                 <Form.Label>每場實況的兌換額度</Form.Label>
                                 <InputGroup>
-                                    <InputGroup.Checkbox id="isMaxPerStreamEnabled" />
-                                    <Form.Control type="number" placeholder="輸入數量"></Form.Control>
+                                    <InputGroup.Checkbox id="isMaxPerStreamEnabled" onChange={this.handleMaxPerStream} />
+                                    <Form.Control type="number" placeholder="輸入數量" disabled={!this.state.isMaxPerStreamEnabled}></Form.Control>
                                 </InputGroup>
                             </Form.Group>
                             <Form.Group as={Col} controlId="maxPerUserPerStream">
                                 <Form.Label>每位使用者每場實況的額度</Form.Label>
                                 <InputGroup>
-                                    <InputGroup.Checkbox id="isMaxPerUserPerStreamEnabled" />
-                                    <Form.Control type="number" placeholder="輸入數量"></Form.Control>
+                                    <InputGroup.Checkbox id="isMaxPerUserPerStreamEnabled" onChange={this.handleMaxPerUserPerStream} />
+                                    <Form.Control type="number" placeholder="輸入數量" disabled={!this.state.isMaxPerUserPerStreamEnabled}></Form.Control>
                                 </InputGroup>
                             </Form.Group>
                         </Row>
@@ -98,8 +113,8 @@ export class RewardEditor extends Component {
                             <Form.Group as={Col} controlId="globalCooldown">
                                 <Form.Label>兌換冷卻時間 (最長7天)</Form.Label>
                                 <InputGroup>
-                                    <InputGroup.Checkbox id="isGlobalCooldownEnabled" />
-                                    <Form.Control type="number" placeholder="輸入數字"></Form.Control>
+                                    <InputGroup.Checkbox id="isGlobalCooldownEnabled" onChange={this.handleGlobalCooldown} />
+                                    <Form.Control type="number" placeholder="輸入數字" disabled={!this.state.isGlobalCooldownEnabled}></Form.Control>
                                     <Form.Select id="globalCooldownUnit">
                                         <option value="1">秒</option>
                                         <option value="60">分</option>

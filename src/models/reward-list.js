@@ -1,12 +1,8 @@
 import { Component } from "react";
-import { Accordion, Stack, Button, Alert } from "react-bootstrap";
+import { Accordion, Stack, Button, Alert, Modal } from "react-bootstrap";
 import { Reward } from './reward';
 
 const access_token = encodeURIComponent('zzphl0ev6dtb1v9heg7s9rpngvgh69');
-const rewards = [
-    {title: "抽獎A", claimers: ["1", "2", "3"], id: 1},
-    {title: "抽獎B", claimers: ["4", "5", "6"], id: 2}
-]
 
 export class RewardList extends Component {
     //URL_PREFIX = 'https://dev.twpaws.live';

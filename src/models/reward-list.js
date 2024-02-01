@@ -15,7 +15,7 @@ export class RewardList extends Component {
     }
 
     getRewardListData = () => {
-        fetch(this.URL_PREFIX.concat(`/redemption/rewards?access_token=${access_token}&broadID=${this.state.broadcasterId}`), {method: "GET"})
+        fetch(this.URL_PREFIX.concat(`/redemption/rewards?access_token=${access_token}&broadcaster_id=${this.state.broadcasterId}`), {method: "GET"})
         .then(res => res.json())
         .then(data => {
             this.setState({rewards: data.data})
@@ -39,7 +39,7 @@ export class RewardList extends Component {
 
     getRewardRedemptionListData = async (rewardId) => {
         return (
-            fetch(`${this.URL_PREFIX}/redemption/rewards-redemption?access_token=${access_token}&broadID=${this.state.broadcasterId}&rewardID=${rewardId}`, {method: "GET"})
+            fetch(`${this.URL_PREFIX}/redemption/rewards-redemption?access_token=${access_token}&broadcaster_id=${this.state.broadcasterId}&rewardID=${rewardId}`, {method: "GET"})
             .then(res => res.json())
             .catch(e => console.log(e))
         );
@@ -49,7 +49,7 @@ export class RewardList extends Component {
         return fetch(this.URL_PREFIX.concat(`/user/broadcasters?access_token=${access_token}`), {method: "GET"})
         .then(res => res.json())
         .then(data => {
-            this.setState({broadcasterId: data.broadcasterId})
+            this.setState({broadcasterId: data.broadcaster_id});
             return data;
         })
         .then(data => {

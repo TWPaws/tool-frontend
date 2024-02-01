@@ -1,6 +1,7 @@
 import { Component } from "react";
-import { Accordion, Stack, Button, Alert, Modal } from "react-bootstrap";
+import { Accordion, Stack, Button, Alert } from "react-bootstrap";
 import { Reward } from './reward';
+import { RewardEditor } from "./reward-editor";
 
 const access_token = encodeURIComponent('zzphl0ev6dtb1v9heg7s9rpngvgh69');
 
@@ -11,7 +12,8 @@ export class RewardList extends Component {
         rewards: [],
         broadcasterId: '',
         rewardItems: [],
-        showAlert: false
+        showAlert: false,
+        showCreateModal: false
     }
 
     getRewardListData = () => {
@@ -33,6 +35,7 @@ export class RewardList extends Component {
         .then(() => {
             this.setState({showAlert: true});
             setTimeout(() => this.setState({showAlert: false}), 3000);
+            this.setState({showCreateModal: false});
         })
         .catch(e => console.log(e));
     }
@@ -59,12 +62,17 @@ export class RewardList extends Component {
     }
 
     createReward = () => {
-
+        this.setState({showCreateModal: true});
     }
 
     componentDidMount() {
         var promise = this.getBroadcasterId();
         promise.then(this.getRewardListData);
+    }
+
+
+    hideCreateModal = () => {
+        this.setState({showCreateModal: false});
     }
 
     updateRewardRenderItem = () => {
@@ -95,6 +103,15 @@ export class RewardList extends Component {
                     {this.state.rewardItems}
                 </Accordion>
             </Stack>
+            <RewardEditor 
+                show={this.state.showCreateModal} 
+                title="建立忠誠點數" 
+                hide={this.hideCreateModal} 
+                submitTarget={this.URL_PREFIX.concat(`/redemption/rewards`)}
+                submitRefresh={this.getRewardListData}
+                access_token={access_token}
+                broadcaster_id={this.state.broadcasterId}
+            />
             </>
         );
     }

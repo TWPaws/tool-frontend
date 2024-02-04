@@ -6,7 +6,8 @@ export class RewardEditor extends Component {
         modalTitle: "",
         isMaxPerStreamEnabled: false,
         isMaxPerUserPerStreamEnabled: false,
-        isGlobalCooldownEnabled: false
+        isGlobalCooldownEnabled: false,
+        isSubmitting: false
     }
 
     submitForm = (e) => {
@@ -25,6 +26,7 @@ export class RewardEditor extends Component {
         .then(res => res.json())
         .then(data => {
             this.props.submitRefresh();
+            this.setState({isSubmitting: false});
         })
         .catch(e => console.log(e));
     }

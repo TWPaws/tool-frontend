@@ -3,7 +3,8 @@ import { Accordion, Stack, Button, Alert } from "react-bootstrap";
 import { Reward } from './reward';
 import { RewardEditor } from "./reward-editor";
 
-const access_token = encodeURIComponent('zzphl0ev6dtb1v9heg7s9rpngvgh69');
+//const access_token = encodeURIComponent('zzphl0ev6dtb1v9heg7s9rpngvgh69');
+var access_token;
 
 export class RewardList extends Component {
     //URL_PREFIX = 'https://dev.twpaws.live';
@@ -71,6 +72,7 @@ export class RewardList extends Component {
     }
 
     componentDidMount() {
+        access_token = sessionStorage.getItem('access_token');
         var promise = this.getBroadcasterId();
         promise.then(this.getRewardListData);
     }

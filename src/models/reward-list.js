@@ -7,8 +7,8 @@ import { RewardEditor } from "./reward-editor";
 var access_token;
 
 export class RewardList extends Component {
-    //URL_PREFIX = 'https://dev.twpaws.live';
-    URL_PREFIX = 'http://127.0.0.1:5000';
+    URL_PREFIX = 'https://www.twpaws.live/api';
+    //URL_PREFIX = 'http://127.0.0.1:5000';
     state = {
         rewards: [],
         broadcasterId: '',

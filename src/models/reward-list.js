@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Accordion, Stack, Button, Alert } from "react-bootstrap";
 import { Reward } from './reward';
 import { RewardEditor } from "./reward-editor";

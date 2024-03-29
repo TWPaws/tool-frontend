@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Form, Modal, Row, Col, InputGroup, Button } from "react-bootstrap";
 
 export class RewardEditor extends Component {

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 export class ClaimerList extends Component {

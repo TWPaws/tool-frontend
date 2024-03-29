@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { ClaimerList } from "./claimer-list";
 

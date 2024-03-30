@@ -21,7 +21,6 @@ export default function App() {
 
   const sessionId = Cookies.get('session') || ''
   const [connectedToTwitch, setConnectedToTwitch] = useState(0);
-  setConnectedToTwitch(false);
 
   return (
     <>

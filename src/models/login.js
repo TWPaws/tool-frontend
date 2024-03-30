@@ -31,7 +31,7 @@ export class LoginModal extends Component {
                 this.props.passLoginInfo(data);
             })
             .catch(e => {
-                this.props.passLoginInfo(None);
+                this.props.passLoginInfo(null);
             })
         })
         .catch(e => console.log(e));

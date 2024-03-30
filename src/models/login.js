@@ -19,14 +19,18 @@ export class LoginModal extends Component {
             method: "POST",
             body: requestBody
         })
-        .then((res) => res.json());
+        .then((res) => res.json())
+        .then(data => {
+            this.setState({isLoggingin: false});
+            this.handleClose();
+        })
+        .catch(e => console.log(e));
     }
 
     packLoginRequestBody = (data) => {
         var formData = new FormData();
         formData.append("username", data.username.value);
         formData.append("password", data.password.value);
-        console.log(formData);
         return formData;
     }
 

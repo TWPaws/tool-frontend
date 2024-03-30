@@ -26,12 +26,18 @@ export class LoginModal extends Component {
         })
         .then(() => {
             fetch(this.URL_PREFIX.concat('/user/status'), {method: "GET"})
-            .then((res) => res.json())
-            .then(data => {
-                this.props.passLoginInfo(data);
-            })
-            .catch(e => {
-                this.props.passLoginInfo(null);
+            .then((res) => {
+                var loginInfo = {};
+                if (res.status == 200) {
+                    loginInfo = {nickname: res.json().nickname, connectedToTwitch: true};
+                }
+                else if (res.status == 404) {
+                    loginInfo = {nickname: res.json().nickname, connectedToTwitch: false};
+                }
+                else {
+                    loginInfo = {nickname: null, connectedToTwitch: false};
+                }
+                return this.props.passLoginInfo(loginInfo);
             })
         })
         .catch(e => console.log(e));

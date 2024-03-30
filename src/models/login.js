@@ -24,6 +24,16 @@ export class LoginModal extends Component {
             this.setState({isLoggingin: false});
             this.handleClose();
         })
+        .then(() => {
+            fetch(this.URL_PREFIX.concat('/user/status'), {method: "GET"})
+            .then((res) => res.json())
+            .then(data => {
+                this.props.passLoginInfo(data);
+            })
+            .catch(e => {
+                this.props.passLoginInfo(None);
+            })
+        })
         .catch(e => console.log(e));
     }
 

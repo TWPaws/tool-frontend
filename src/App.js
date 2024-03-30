@@ -13,12 +13,6 @@ export default function App() {
     setBroadcasterInfo(broadcasterInfo)
   };
 
-  const access_token = sessionStorage.getItem('access_token');
-  const [searchParam] = useSearchParams();
-  if (searchParam.get('access_token')) {
-    sessionStorage.setItem('access_token', searchParam.get('access_token'));
-  }
-
   const sessionId = Cookies.get('session') || ''
   const [connectedToTwitch, setConnectedToTwitch] = useState(0);
 

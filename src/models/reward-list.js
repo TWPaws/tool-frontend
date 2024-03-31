@@ -3,8 +3,6 @@ import { Accordion, Stack, Button, Alert } from "react-bootstrap";
 import { Reward } from './reward';
 import { RewardEditor } from "./reward-editor";
 
-//const access_token = encodeURIComponent('zzphl0ev6dtb1v9heg7s9rpngvgh69');
-var access_token;
 
 export class RewardList extends Component {
     URL_PREFIX = 'https://www.twpaws.live/api';
@@ -72,7 +70,6 @@ export class RewardList extends Component {
     }
 
     componentDidMount() {
-        access_token = sessionStorage.getItem('access_token');
         var promise = this.getBroadcasterId();
         promise.then(this.getRewardListData);
     }
@@ -139,8 +136,6 @@ export class RewardList extends Component {
                 hide={this.hideCreateModal} 
                 submitTarget={this.URL_PREFIX.concat(`/redemption/rewards`)}
                 submitRefresh={this.getRewardListData}
-                access_token={access_token}
-                broadcaster_id={this.state.broadcasterId}
             />
             </>
         );

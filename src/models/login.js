@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Modal, Form, Row, FormGroup, Col } from "react-bootstrap";
+import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 export class LoginModal extends Component {
     URL_PREFIX = 'https://www.twpaws.live/api'
@@ -28,10 +28,10 @@ export class LoginModal extends Component {
             fetch(this.URL_PREFIX.concat('/user/status'), {method: "GET"})
             .then((res) => {
                 var loginInfo = {};
-                if (res.status == 200) {
+                if (res.status === 200) {
                     loginInfo = {nickname: res.json().nickname, connectedToTwitch: true};
                 }
-                else if (res.status == 404) {
+                else if (res.status === 404) {
                     loginInfo = {nickname: res.json().nickname, connectedToTwitch: false};
                 }
                 else {

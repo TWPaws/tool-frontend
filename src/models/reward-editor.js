@@ -14,8 +14,6 @@ export class RewardEditor extends Component {
         e.preventDefault();
         this.setState({isSubmitting: true});
         var requestBody = this.packRequestBody(e.target);
-        requestBody.access_token = this.props.access_token;
-        requestBody.broadcaster_id = this.props.broadcaster_id;
         fetch(this.props.submitTarget, {
             method: "POST",
             headers: {

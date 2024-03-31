@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 import { LoginModal } from './models/login.js';
 
 export default function App() {
-  const URL_PREFIX = 'https://www.twpaws.live/api'
+  const URL_PREFIX = process.env.REACT_APP_URL_PREFIX;
   const [broadcasterInfo, setBroadcasterInfo] = useState(0);
-  const [loginInfo, setLoginInfo] = useState(0);
   const [nickname, setNickname] = useState(0);
   const [connectedToTwitch, setConnectedToTwitch] = useState(0);
 

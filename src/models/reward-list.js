@@ -5,8 +5,7 @@ import { RewardEditor } from "./reward-editor";
 
 
 export class RewardList extends Component {
-    URL_PREFIX = 'https://www.twpaws.live/api';
-    //URL_PREFIX = 'http://127.0.0.1:5000';
+    URL_PREFIX = process.env.REACT_APP_URL_PREFIX;
     state = {
         rewards: [],
         broadcasterId: '',

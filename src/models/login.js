@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 export class LoginModal extends Component {
-    URL_PREFIX = 'https://www.twpaws.live/api'
+    URL_PREFIX = process.env.REACT_APP_URL_PREFIX;
     state = {
         showModal: false,
         isLoggingin: false

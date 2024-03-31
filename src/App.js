@@ -1,10 +1,11 @@
 import { Container, Navbar } from 'react-bootstrap';
 import './App.css';
 import { RewardList } from './models/reward-list.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoginModal } from './models/login.js';
 
 export default function App() {
+  const URL_PREFIX = 'https://www.twpaws.live/api'
   const [broadcasterInfo, setBroadcasterInfo] = useState(0);
   const [loginInfo, setLoginInfo] = useState(0);
   const [nickname, setNickname] = useState(0);
@@ -18,6 +19,24 @@ export default function App() {
     setNickname(loginInfo.nickname);
     setConnectedToTwitch(loginInfo.connectedToTwitch);
   };
+
+  useEffect(() => {
+    fetch(URL_PREFIX.concat('/user/status'), {method: "GET"})
+    .then((res) => {
+        if (res.status === 200) {
+          setNickname(res.json().nickname);
+          setConnectedToTwitch(true);
+        }
+        else if (res.status === 404) {
+          setNickname(res.json().nickname);
+          setConnectedToTwitch(false);
+        }
+        else {
+          setNickname(null);
+          setConnectedToTwitch(false);
+        }
+    })
+  });
 
   return (
     <>

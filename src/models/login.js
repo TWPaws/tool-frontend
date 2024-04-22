@@ -17,7 +17,10 @@ export class LoginModal extends Component {
         var requestBody = this.packLoginRequestBody(e.target);
         fetch(this.URL_PREFIX.concat('/user/login'), {
             method: "POST",
-            body: requestBody
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
         })
         .then((res) => res.json())
         .then(data => {
@@ -44,10 +47,11 @@ export class LoginModal extends Component {
     }
 
     packLoginRequestBody = (data) => {
-        var formData = new FormData();
-        formData.append("username", data.username.value);
-        formData.append("password", data.password.value);
-        return formData;
+        var jsonObj = {
+            "username": data.username.value,
+            "password": data.password.value
+        }
+        return jsonObj;
     }
 
     render() {
